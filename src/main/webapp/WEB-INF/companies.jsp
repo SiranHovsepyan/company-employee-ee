@@ -22,6 +22,7 @@ Companies | <a href="/addCompany">Add Company</a>
         <th>ID</th>
         <th>Name</th>
         <th>Address</th>
+        <th>User Added</th>
         <th>Delete</th>
         <th>Update</th>
     </tr>
@@ -32,6 +33,12 @@ Companies | <a href="/addCompany">Add Company</a>
                 <td><%=company.getId()%></td>
                 <td><a href="/singleCompany?id=<%=company.getId()%>"><%=company.getName()%></a></td>
                 <td><%=company.getAddress()%></td>
+                <td>
+                    <%if (company.getUser()!=null){%>
+                    <%=company.getUser().getName()+" "+company.getUser().getSurname()%>
+                    <%}%>
+
+                </td>
                 <td><a href="/deleteCompany?id=<%=company.getId()%>">Delete</a></td>
                 <td><a href="/updateCompany?id=<%=company.getId()%>">Update</a></td>
             </tr>

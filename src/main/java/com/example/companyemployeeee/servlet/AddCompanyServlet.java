@@ -2,6 +2,7 @@ package com.example.companyemployeeee.servlet;
 
 import com.example.companyemployeeee.manager.CompanyManager;
 import com.example.companyemployeeee.model.Company;
+import com.example.companyemployeeee.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,11 +25,14 @@ public class AddCompanyServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User user = (User) req.getSession().getAttribute("user");
+
         String companyName = req.getParameter("companyName");
         String companyAddress = req.getParameter("companyAddress");
         companyManager.add(Company.builder()
                         .name(companyName)
                         .address(companyAddress)
+                        .user(user)
                 .build());
         resp.sendRedirect("/companies");
     }

@@ -48,4 +48,23 @@ public class UserManager {
         }
         return null;
     }
+
+    public User getUserById(int id) {
+        String sql = "SELECT * FROM user WHERE id="+id;
+        try (Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                return    User.builder()
+                        .id(resultSet.getInt("id"))
+                        .name(resultSet.getString("name"))
+                        .surname(resultSet.getString("surname"))
+                        .email(resultSet.getString("email"))
+                        .password(resultSet.getString("password"))
+                        .build();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
